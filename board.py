@@ -28,6 +28,19 @@ class Board:
 
     def __init__(self, cells):
         self.cells = cells
+        self.make_move(6, 4, 4, 4)
+    
+    def make_move(self, start_row, start_col, end_row, end_col):
+        try:
+            figure = self.cells[start_row][start_col]
+            if not figure: return f"В {start_row}{start_col} нет фигуры!"
+            figure2 = self.cells[end_row][end_col]
+            if figure2 and figure.side == figure2.side:
+                return f"Нельзя есть свой цвет!"
+            self.cells[start_row][start_col] = None
+            self.cells[end_row][end_col] = figure
+        except IndexError:
+            return f"Ход {start_row}{start_col} {end_row}{end_col} ошибочен!"
 
 
 if __name__ == "__main__":
