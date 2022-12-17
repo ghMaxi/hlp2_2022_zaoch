@@ -1,2 +1,3 @@
 BLACK = 'b'
 WHITE = 'w'
+

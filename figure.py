@@ -7,4 +7,3 @@ class Figure:
     @property
     def id(self):
         return self.side + self.symbol
-

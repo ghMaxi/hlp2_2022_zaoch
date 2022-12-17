@@ -2,7 +2,7 @@ from PIL import Image
 image_size = 426
 
 
-def _cut_in_squares(save_tests=False):
+def get_raw_images(save_tests=False):
     atlas_path = "images/2560px-Chess_Pieces_Sprite.png"
     if save_tests:
         from os.path import isdir
@@ -24,14 +24,10 @@ def _cut_in_squares(save_tests=False):
             if save_tests:
                 figure.save(f"test\\img{low_x}_{low_y}.png")
             raw_images.append(figure)
-    return raw_images
-
-
-images = dict(zip(('wK', 'wQ', 'wB', 'wH', 'wR', 'wp',
+    return dict(zip(('wK', 'wQ', 'wB', 'wH', 'wR', 'wp',
                    'bK', 'bQ', 'bB', 'bH', 'bR', 'bp',),
-              _cut_in_squares()))
-from pprint import pprint
-pprint(images)
+              raw_images))
+
 
 if __name__ == "__main__":
-    _cut_in_squares(save_tests=True)
+    get_raw_images(save_tests=True)

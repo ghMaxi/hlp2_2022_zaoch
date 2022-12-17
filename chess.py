@@ -1,6 +1,6 @@
 import tkinter
 from constants import *
-from images import images
+from images import get_raw_images
 from PIL import ImageTk
 
 
@@ -10,6 +10,7 @@ class ChessApplication(tkinter.Tk):
 
         # инициализация данных
         self.board = board
+        images = get_raw_images()
         self.images = {
             key: ImageTk.PhotoImage(
                 images[key].resize( (100, 100) ))
@@ -27,22 +28,11 @@ class ChessApplication(tkinter.Tk):
             width=800, height=800,
             bg='brown')
         self.canvas.pack()
-        self.field_row1 = tkinter.Entry(
-            self, textvariable=self.vars['row1'])
-        self.field_row1.pack()
-        self.field_row2 = tkinter.Entry(
-            self, textvariable=self.vars['row2'])
-        self.field_row2.pack()
-        self.field_col1 = tkinter.Entry(
-            self, textvariable=self.vars['col1'])
-        self.field_col1.pack()
-        self.field_col2 = tkinter.Entry(
-            self, textvariable=self.vars['col2'])
-        self.field_col2.pack()
-        self.move_button = tkinter.Button(
-            self, text='Сделать ход!')
-        self.move_button.pack()
-
+        tkinter.Entry(self, textvariable=self.vars['row1']).pack()
+        tkinter.Entry(self, textvariable=self.vars['row2']).pack()
+        tkinter.Entry(self, textvariable=self.vars['col1']).pack()
+        tkinter.Entry(self, textvariable=self.vars['col2']).pack()
+        tkinter.Button(self, text='Сделать ход!').pack()
         self.draw()
 
     def draw(self):
@@ -67,3 +57,13 @@ class ChessApplication(tkinter.Tk):
         self.canvas.create_image(
             x, y, anchor='nw',
             image=self.images[figure_id])
+
+
+def main():
+    from board import Board
+    ChessApplication(Board.start()).mainloop()
+
+
+if __name__ == "__main__":
+    main()
+    
